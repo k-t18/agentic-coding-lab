@@ -1,0 +1,396 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN SYSTEM — Token Definitions (Tailwind v4 @theme)
+   Source of truth: Figma "Design System (Community)"
+   All @theme keys are exposed as Tailwind utility classes.
+   ============================================================ */
+
+@theme {
+  /* ----------------------------------------------------------
+     FONT FAMILY
+     Inter is loaded via next/font in layout.tsx which injects
+     --font-inter-next as a CSS variable at runtime.
+  ---------------------------------------------------------- */
+  --font-sans: var(--font-inter-next), "Inter", system-ui, sans-serif;
+
+  /* ----------------------------------------------------------
+     COLOR PALETTE — Primary (Brand Blue)
+  ---------------------------------------------------------- */
+  --color-primary-50: #edeffe;
+  --color-primary-100: #c8cefc;
+  --color-primary-200: #aeb6fb;
+  --color-primary-300: #8895f9;
+  --color-primary-400: #7181f8;
+  --color-primary-500: #4e61f6;
+  --color-primary-600: #4758e0;
+  --color-primary-700: #3745af;
+  --color-primary-800: #2b3587;
+  --color-primary-900: #212967;
+
+  /* ----------------------------------------------------------
+     COLOR PALETTE — Grey (Neutral)
+  ---------------------------------------------------------- */
+  --color-grey-50: #f9fafb;
+  --color-grey-100: #f3f4f6;
+  --color-grey-200: #e5e7ea;
+  --color-grey-300: #d2d5db;
+  --color-grey-400: #9ea2ae;
+  --color-grey-500: #6d717f;
+  --color-grey-600: #4d5461;
+  --color-grey-700: #394050;
+  --color-grey-800: #212936;
+  --color-grey-900: #131927;
+
+  /* ----------------------------------------------------------
+     COLOR PALETTE — Green (Success)
+  ---------------------------------------------------------- */
+  --color-green-50: #ecf8ef;
+  --color-green-100: #c5e9cd;
+  --color-green-200: #a9deb4;
+  --color-green-300: #81cf92;
+  --color-green-400: #69c57d;
+  --color-green-500: #43b75d;
+  --color-green-600: #3da755;
+  --color-green-700: #308242;
+  --color-green-800: #256533;
+  --color-green-900: #1c4d27;
+
+  /* ----------------------------------------------------------
+     COLOR PALETTE — Red (Destructive/Error)
+  ---------------------------------------------------------- */
+  --color-red-50: #fdecec;
+  --color-red-100: #fac5c3;
+  --color-red-200: #f7a9a7;
+  --color-red-300: #f4827e;
+  --color-red-400: #f16965;
+  --color-red-500: #ee443f;
+  --color-red-600: #d93e39;
+  --color-red-700: #a9302d;
+  --color-red-800: #832523;
+  --color-red-900: #641d1a;
+
+  /* ----------------------------------------------------------
+     COLOR PALETTE — Yellow (Warning)
+  ---------------------------------------------------------- */
+  --color-yellow-50: #fff7e6;
+  --color-yellow-100: #ffe5b0;
+  --color-yellow-200: #ffd88a;
+  --color-yellow-300: #ffc654;
+  --color-yellow-400: #ffbb33;
+  --color-yellow-500: #ffaa00;
+  --color-yellow-600: #e89b00;
+  --color-yellow-700: #b57900;
+  --color-yellow-800: #8c5e00;
+  --color-yellow-900: #6b4700;
+
+  /* ----------------------------------------------------------
+     COLOR PALETTE — Blue (Informational)
+  ---------------------------------------------------------- */
+  --color-blue-50: #e6f4ff;
+  --color-blue-100: #b0deff;
+  --color-blue-200: #8aceff;
+  --color-blue-300: #54b8ff;
+  --color-blue-400: #33aaff;
+  --color-blue-500: #0095ff;
+  --color-blue-600: #0088e8;
+  --color-blue-700: #006ab5;
+  --color-blue-800: #00528c;
+  --color-blue-900: #003f6b;
+
+  /* ----------------------------------------------------------
+     SEMANTIC COLORS — Text
+     Use these instead of raw palette values in components.
+  ---------------------------------------------------------- */
+  --color-text-primary: #131927;
+  --color-text-secondary: #6d717f;
+  --color-text-link: #4e61f6;
+  --color-text-white: #ffffff;
+  --color-text-disabled: #9ea2ae;
+  --color-text-error: #ee443f;
+  --color-text-success: #43b75d;
+  --color-text-warning: #ffaa00;
+
+  /* ----------------------------------------------------------
+     SEMANTIC COLORS — Surface / Background
+  ---------------------------------------------------------- */
+  --color-surface-white: #ffffff;
+  --color-surface-light: #f9fafb;
+  --color-surface-canvas: #f3f4f6;
+
+  /* ----------------------------------------------------------
+     SEMANTIC COLORS — Border
+  ---------------------------------------------------------- */
+  --color-border-default: #d2d5db;
+  --color-border-strong: #9ea2ae;
+  --color-border-focus: #4e61f6;
+  --color-border-error: #ee443f;
+  --color-border-success: #43b75d;
+
+  /* ----------------------------------------------------------
+     SEMANTIC COLORS — Action (Primary Brand)
+  ---------------------------------------------------------- */
+  --color-action-primary: #4e61f6;
+  --color-action-primary-hover: #4758e0;
+  --color-action-primary-active: #3745af;
+  --color-action-primary-subtle: #edeffe;
+
+  /* ----------------------------------------------------------
+     SEMANTIC COLORS — Status
+  ---------------------------------------------------------- */
+  --color-status-success: #43b75d;
+  --color-status-success-bg: #ecf8ef;
+  --color-status-warning: #ffaa00;
+  --color-status-warning-bg: #fff7e6;
+  --color-status-error: #ee443f;
+  --color-status-error-bg: #fdecec;
+  --color-status-info: #0095ff;
+  --color-status-info-bg: #e6f4ff;
+
+  /* ----------------------------------------------------------
+     BORDER RADIUS
+     Figma confirmed: radius-sm (card bg) = 12px, radius-xl = 24px,
+     button corner radius = 8px.
+  ---------------------------------------------------------- */
+  --radius-none: 0px;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* ----------------------------------------------------------
+     ELEVATION / SHADOWS
+     8-level scale. Base color: #131927 (Grey/900).
+     Confirmed from Figma shadow component.
+  ---------------------------------------------------------- */
+  --shadow-100: 0px 2px 4px -2px rgba(19, 25, 39, 0.12),
+    0px 4px 4px -2px rgba(19, 25, 39, 0.08);
+  --shadow-200: 0px 4px 6px -4px rgba(19, 25, 39, 0.12),
+    0px 8px 8px -4px rgba(19, 25, 39, 0.08);
+  --shadow-300: 0px 6px 8px -6px rgba(19, 25, 39, 0.12),
+    0px 8px 16px -6px rgba(19, 25, 39, 0.08);
+  --shadow-400: 0px 6px 12px -6px rgba(19, 25, 39, 0.12),
+    0px 8px 24px -4px rgba(19, 25, 39, 0.08);
+  --shadow-500: 0px 6px 14px -6px rgba(19, 25, 39, 0.12),
+    0px 10px 32px -4px rgba(19, 25, 39, 0.1);
+  --shadow-600: 0px 8px 18px -6px rgba(19, 25, 39, 0.12),
+    0px 12px 42px -4px rgba(19, 25, 39, 0.12);
+  --shadow-700: 0px 8px 22px -6px rgba(19, 25, 39, 0.12),
+    0px 14px 64px -4px rgba(19, 25, 39, 0.12);
+  --shadow-800: 0px 8px 28px -6px rgba(19, 25, 39, 0.12),
+    0px 18px 88px -4px rgba(19, 25, 39, 0.14);
+}
+
+/* ============================================================
+   BASE STYLES
+   Global defaults applied to all pages.
+   ============================================================ */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 1rem; /* 16px — B1 Body */
+    line-height: 1.5; /* 24px */
+    font-weight: 400;
+    color: var(--color-text-primary);
+    background-color: var(--color-surface-white);
+  }
+
+  /* Focus ring — visible for keyboard users */
+  :focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
+
+  /* Text selection */
+  ::selection {
+    background-color: var(--color-primary-100);
+    color: var(--color-text-primary);
+  }
+
+  /* Smooth anchors */
+  a {
+    color: var(--color-text-link);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   Maps directly to Figma text styles.
+   All families: Inter. Letter-spacing: 0 (all styles).
+
+   HEADINGS (H1–H5) — Semi Bold
+   SUBTITLES (S1–S2) — Semi Bold
+   BODY (B1–B4) — Regular/Medium
+   CAPTIONS (C1–C3) — Regular/Medium
+   LABEL — Medium
+   BUTTON SIZES — Semi Bold
+   ============================================================ */
+
+/* --- Headings --- */
+@utility text-h1 {
+  font-size: 3rem; /* 48px */
+  line-height: 3.625rem; /* 58px */
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@utility text-h2 {
+  font-size: 2.5rem; /* 40px */
+  line-height: 3rem; /* 48px */
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@utility text-h3 {
+  font-size: 2rem; /* 32px */
+  line-height: 2.375rem; /* 38px */
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@utility text-h4 {
+  font-size: 1.75rem; /* 28px */
+  line-height: 2.125rem; /* 34px */
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@utility text-h5 {
+  font-size: 1.5rem; /* 24px */
+  line-height: 1.75rem; /* 28px */
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* --- Subtitles --- */
+@utility text-s1 {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.75rem; /* 28px */
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@utility text-s2 {
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* --- Body --- */
+@utility text-b1 {
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+@utility text-b2 {
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+@utility text-b3 {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+@utility text-b4 {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* --- Captions --- */
+@utility text-c1 {
+  font-size: 0.75rem; /* 12px */
+  line-height: 1rem; /* 16px */
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+@utility text-c2 {
+  font-size: 0.75rem; /* 12px */
+  line-height: 1rem; /* 16px */
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+@utility text-c3 {
+  font-size: 0.625rem; /* 10px */
+  line-height: 0.875rem; /* 14px */
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* --- Label --- */
+@utility text-label {
+  font-size: 0.75rem; /* 12px */
+  line-height: 1rem; /* 16px */
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* --- Button Text Sizes --- */
+@utility text-btn-giant {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.5rem; /* 24px */
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@utility text-btn-large {
+  font-size: 1rem; /* 16px */
+  line-height: 1.25rem; /* 20px */
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@utility text-btn-medium {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1rem; /* 16px */
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@utility text-btn-small {
+  font-size: 0.75rem; /* 12px */
+  line-height: 1rem; /* 16px */
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@utility text-btn-tiny {
+  font-size: 0.625rem; /* 10px */
+  line-height: 0.75rem; /* 12px */
+  font-weight: 600;
+  letter-spacing: 0;
+}
