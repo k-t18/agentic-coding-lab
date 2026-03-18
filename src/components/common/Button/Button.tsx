@@ -5,11 +5,10 @@ import { cn } from "@/lib/utils";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-export type ButtonVariant = "primary" | "secondary" | "ghost";
+export type ButtonVariant = "primary" | "outline" | "ghost";
 export type ButtonSize = "giant" | "large" | "medium" | "small" | "tiny";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Visual style of the button. Defaults to "primary". */
   variant?: ButtonVariant;
   /** Size tier of the button. Defaults to "medium". */
@@ -91,7 +90,7 @@ const VARIANT_STYLES = {
     "disabled:bg-grey-200 disabled:text-text-disabled disabled:border-transparent",
   ].join(" "),
 
-  secondary: [
+  outline: [
     // Base — 1.5px border per Figma spec
     "bg-transparent text-action-primary border-[1.5px] border-action-primary",
     // Hover
@@ -161,7 +160,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       "aria-label": ariaLabel,
       ...props
     },
-    ref,
+    ref
   ) => {
     if (
       process.env.NODE_ENV !== "production" &&
@@ -170,7 +169,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       !props["aria-labelledby"]
     ) {
       console.warn(
-        "[Button] Icon-only buttons require an `aria-label` or `aria-labelledby` prop for accessibility.",
+        "[Button] Icon-only buttons require an `aria-label` or `aria-labelledby` prop for accessibility."
       );
     }
 
@@ -206,7 +205,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           // ── Full width
           fullWidth && "w-full",
           // ── Consumer overrides (merged via tailwind-merge)
-          className,
+          className
         )}
         {...props}
       >
@@ -215,7 +214,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           <Spinner className={sizeStyle.icon} />
         ) : iconOnly ? (
           // Icon-only mode — render a single icon, centered
-          <span className={cn("inline-flex items-center justify-center shrink-0 [&>svg]:size-full", sizeStyle.icon)} aria-hidden="true">
+          <span
+            className={cn(
+              "inline-flex items-center justify-center shrink-0 [&>svg]:size-full",
+              sizeStyle.icon
+            )}
+            aria-hidden="true"
+          >
             {leadingIcon ?? children}
           </span>
         ) : (
@@ -223,7 +228,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           <>
             {leadingIcon && (
               <span
-                className={cn("inline-flex items-center justify-center shrink-0 [&>svg]:size-full", sizeStyle.icon)}
+                className={cn(
+                  "inline-flex items-center justify-center shrink-0 [&>svg]:size-full",
+                  sizeStyle.icon
+                )}
                 aria-hidden="true"
               >
                 {leadingIcon}
@@ -232,7 +240,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {children}
             {trailingIcon && (
               <span
-                className={cn("inline-flex items-center justify-center shrink-0 [&>svg]:size-full", sizeStyle.icon)}
+                className={cn(
+                  "inline-flex items-center justify-center shrink-0 [&>svg]:size-full",
+                  sizeStyle.icon
+                )}
                 aria-hidden="true"
               >
                 {trailingIcon}
@@ -242,7 +253,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
       </button>
     );
-  },
+  }
 );
 
 Button.displayName = "Button";

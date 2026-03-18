@@ -13,27 +13,31 @@ interface DoctorCardActionsProps {
 // Action row: contact icon buttons + Book Now CTA.
 // Book Now toggles the appointment calendar.
 
-export function DoctorCardActions({ isActive, isDisabled, onBookNow }: DoctorCardActionsProps) {
+export function DoctorCardActions({
+  isActive,
+  isDisabled,
+  onBookNow,
+}: DoctorCardActionsProps) {
   return (
     <div className="flex items-center justify-between gap-2">
       {/* Contact icon buttons */}
       <div className="flex items-center gap-2">
         <Button
-          variant="secondary"
+          variant="outline"
           size="small"
           iconOnly
           aria-label="Send email"
           leadingIcon={<Mail />}
         />
         <Button
-          variant="secondary"
+          variant="outline"
           size="small"
           iconOnly
           aria-label="Call doctor"
           leadingIcon={<Phone />}
         />
         <Button
-          variant="secondary"
+          variant="outline"
           size="small"
           iconOnly
           aria-label="WhatsApp"

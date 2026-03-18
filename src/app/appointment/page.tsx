@@ -1,51 +1,59 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { AppointmentHeader } from "./components/AppointmentHeader";
-import { AppointmentTabs } from "./components/AppointmentTabs";
-import { AppointmentSearch } from "./components/AppointmentSearch";
-import { SpecialtySidebar } from "./components/SpecialtySidebar";
-import { DoctorGrid } from "./components/DoctorGrid";
-import { SPECIALTIES, DOCTORS } from "./data/mockData";
+import { useState, useMemo, useEffect } from "react";
+import { AppointmentHeader } from "../../components/modules/appointment/AppointmentHeader";
+import { AppointmentTabs } from "../../components/modules/appointment/AppointmentTabs";
+import { AppointmentSearch } from "../../components/modules/appointment/AppointmentSearch";
+import { SpecialtySidebar } from "../../components/modules/appointment/SpecialtySidebar";
+import { DoctorGrid } from "../../components/modules/appointment/DoctorGrid";
+import useFetchSpecialities from "@/hooks/modules/appointment/useFetchSpecialities";
+import useFetchDoctors from "@/hooks/modules/appointment/useFetchDoctors";
 
 // ─── Appointment Page ─────────────────────────────────────────────────────────
 
 export default function AppointmentPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSpecialty, setSelectedSpecialty] = useState<string | null>(null);
-  const [selectedDoctorId, setSelectedDoctorId] = useState<number | null>(null);
+  const [selectedDoctorId, setSelectedDoctorId] = useState<string | null>(null);
 
-  // Toggling the same specialty deselects it
+  const { data: specialties, isLoading: specialtiesLoading } = useFetchSpecialities();
+  const { data: doctors, isLoading: doctorsLoading } = useFetchDoctors(selectedSpecialty ?? "");
+
+  // Auto-select first specialty once loaded
+  useEffect(() => {
+    if (specialties.length > 0 && selectedSpecialty === null) {
+      setSelectedSpecialty(specialties[0].id);
+    }
+  }, [specialties, selectedSpecialty]);
+
+  // Prevent deselection — only switch if a different specialty is picked
   function handleSpecialtySelect(id: string) {
-    setSelectedSpecialty((prev) => (prev === id ? null : id));
+    if (id !== selectedSpecialty) {
+      setSelectedSpecialty(id);
+      setSelectedDoctorId(null);
+    }
   }
 
   // Toggling the same doctor closes the calendar
-  function handleDoctorSelect(id: number) {
+  function handleDoctorSelect(id: string) {
     setSelectedDoctorId((prev) => (prev === id ? null : id));
   }
 
   const filteredSpecialties = useMemo(() => {
-    if (!searchQuery.trim()) return SPECIALTIES;
+    if (!searchQuery.trim()) return specialties;
     const q = searchQuery.toLowerCase();
-    return SPECIALTIES.filter((s) => s.label.toLowerCase().includes(q));
-  }, [searchQuery]);
+    return specialties.filter((s) => s.label.toLowerCase().includes(q));
+  }, [searchQuery, specialties]);
 
   const filteredDoctors = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
-    return DOCTORS.filter((d) => {
-      const matchesSpecialty =
-        selectedSpecialty === null ||
-        d.specialty.toLowerCase() === SPECIALTIES.find((s) => s.id === selectedSpecialty)?.label.toLowerCase();
-
-      const matchesSearch =
-        !q ||
-        d.name.toLowerCase().includes(q) ||
-        d.specialty.toLowerCase().includes(q);
-
-      return matchesSpecialty && matchesSearch;
-    });
-  }, [searchQuery, selectedSpecialty]);
+    if (!q) return doctors;
+    return doctors.filter(
+      (d) =>
+        d.doctor_name.toLowerCase().includes(q) ||
+        d.specialty.toLowerCase().includes(q)
+    );
+  }, [searchQuery, doctors]);
 
   const newAppointmentContent = (
     <div className="flex flex-col gap-4">
@@ -58,17 +66,29 @@ export default function AppointmentPage() {
 
       {/* Sidebar + Doctor grid */}
       <div className="flex items-start gap-6">
-        <SpecialtySidebar
-          specialties={filteredSpecialties}
-          selectedSpecialty={selectedSpecialty}
-          onSelect={handleSpecialtySelect}
-        />
-        <div className="min-w-0 flex-1">
-          <DoctorGrid
-            doctors={filteredDoctors}
-            selectedDoctorId={selectedDoctorId}
-            onDoctorSelect={handleDoctorSelect}
+        {specialtiesLoading ? (
+          <aside className="flex w-56 shrink-0 items-center justify-center rounded-xl border border-grey-200 bg-white p-4 shadow-100">
+            <p className="text-b2 text-text-disabled">Loading…</p>
+          </aside>
+        ) : (
+          <SpecialtySidebar
+            specialties={filteredSpecialties}
+            selectedSpecialty={selectedSpecialty}
+            onSelect={handleSpecialtySelect}
           />
+        )}
+        <div className="min-w-0 flex-1">
+          {doctorsLoading ? (
+            <div className="flex items-center justify-center py-16">
+              <p className="text-b1 text-text-disabled">Loading doctors…</p>
+            </div>
+          ) : (
+            <DoctorGrid
+              doctors={filteredDoctors}
+              selectedDoctorId={selectedDoctorId}
+              onDoctorSelect={handleDoctorSelect}
+            />
+          )}
         </div>
       </div>
     </div>

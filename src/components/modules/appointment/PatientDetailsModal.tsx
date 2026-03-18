@@ -36,11 +36,16 @@ export interface PatientDetailsModalProps {
 // Triggered by the "Confirm Appointment" button in AppointmentCalendar.
 // Name, phone, and email are mandatory with inline validation.
 
-export function PatientDetailsModal({ isOpen, onClose, onSave }: PatientDetailsModalProps) {
+export function PatientDetailsModal({
+  isOpen,
+  onClose,
+  onSave,
+}: PatientDetailsModalProps) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [appointmentStatus, setAppointmentStatus] = useState<AppointmentStatus>("tentative");
+  const [appointmentStatus, setAppointmentStatus] =
+    useState<AppointmentStatus>("tentative");
   const [remarks, setRemarks] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
 
@@ -59,7 +64,9 @@ export function PatientDetailsModal({ isOpen, onClose, onSave }: PatientDetailsM
   // Lock body scroll while modal is mounted
   useEffect(() => {
     if (isOpen) document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isOpen]);
 
   // ── Validation ─────────────────────────────────────────────────────────────
@@ -141,7 +148,6 @@ export function PatientDetailsModal({ isOpen, onClose, onSave }: PatientDetailsM
 
         {/* Form body */}
         <div className="flex flex-col gap-5 px-6 py-5">
-
           {/* Patient ID & Name */}
           <div className="w-1/3">
             <Input
@@ -157,7 +163,6 @@ export function PatientDetailsModal({ isOpen, onClose, onSave }: PatientDetailsM
 
           {/* Mobile No. | Email ID | Appointment Status */}
           <div className="grid grid-cols-3 items-start gap-4">
-
             {/* Mobile No. */}
             <div className="flex flex-col gap-2">
               <span className="text-b2 text-text-primary">Mobile No.</span>
@@ -224,7 +229,7 @@ export function PatientDetailsModal({ isOpen, onClose, onSave }: PatientDetailsM
 
         {/* Footer */}
         <div className="flex items-center justify-end gap-3 border-t border-grey-100 px-6 py-4">
-          <Button variant="secondary" size="medium" onClick={handleCancel}>
+          <Button variant="outline" size="medium" onClick={handleCancel}>
             Cancel
           </Button>
           <Button variant="primary" size="medium" onClick={handleSave}>

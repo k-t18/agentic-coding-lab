@@ -1,14 +1,14 @@
 import React from "react";
 import { DoctorCard } from "./DoctorCard";
 import { AppointmentCalendar } from "./AppointmentCalendar";
-import type { Doctor } from "../data/mockData";
+import type { Doctor } from "../../../app/appointment/data/mockData";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface DoctorGridProps {
   doctors: Doctor[];
-  selectedDoctorId: number | null;
-  onDoctorSelect: (id: number) => void;
+  selectedDoctorId: string | null;
+  onDoctorSelect: (id: string) => void;
 }
 
 const COLS_PER_ROW = 3;
@@ -17,7 +17,11 @@ const COLS_PER_ROW = 3;
 // Groups doctors into rows of 3. After the row containing the selected doctor,
 // the AppointmentCalendar is injected spanning the full grid width.
 
-export function DoctorGrid({ doctors, selectedDoctorId, onDoctorSelect }: DoctorGridProps) {
+export function DoctorGrid({
+  doctors,
+  selectedDoctorId,
+  onDoctorSelect,
+}: DoctorGridProps) {
   if (doctors.length === 0) {
     return (
       <div className="flex flex-1 items-center justify-center py-16">
@@ -34,7 +38,7 @@ export function DoctorGrid({ doctors, selectedDoctorId, onDoctorSelect }: Doctor
 
   const selectedDoctor =
     selectedDoctorId !== null
-      ? doctors.find((d) => d.id === selectedDoctorId) ?? null
+      ? (doctors.find((d) => d.id === selectedDoctorId) ?? null)
       : null;
 
   return (

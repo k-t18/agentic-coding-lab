@@ -2,8 +2,19 @@
 import { Button } from "@/components/common/Button";
 import { Input } from "@/components/common/Input";
 import { Radio, RadioGroup } from "@/components/common/Radio";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/common/Tabs";
-import { PlusIcon, XIcon, SettingsIcon, UserIcon, BellIcon } from "lucide-react";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "@/components/common/Tabs";
+import {
+  PlusIcon,
+  XIcon,
+  SettingsIcon,
+  UserIcon,
+  BellIcon,
+} from "lucide-react";
 
 export default function HomePage() {
   return (
@@ -25,7 +36,7 @@ export default function HomePage() {
             >
               Primary
             </Button>
-            <Button variant="secondary">Secondary</Button>
+            <Button variant="outline">Outline</Button>
             <Button variant="ghost">Ghost</Button>
           </div>
         </div>
@@ -94,12 +105,34 @@ export default function HomePage() {
           <h3 className="text-h5 text-text-primary mb-4">Label Position</h3>
           <div className="flex flex-wrap items-center gap-8">
             <RadioGroup label="Right (default)" orientation="vertical">
-              <Radio name="lp-right" value="a" label="Option A" labelPosition="right" defaultChecked />
-              <Radio name="lp-right" value="b" label="Option B" labelPosition="right" />
+              <Radio
+                name="lp-right"
+                value="a"
+                label="Option A"
+                labelPosition="right"
+                defaultChecked
+              />
+              <Radio
+                name="lp-right"
+                value="b"
+                label="Option B"
+                labelPosition="right"
+              />
             </RadioGroup>
             <RadioGroup label="Left" orientation="vertical">
-              <Radio name="lp-left" value="a" label="Option A" labelPosition="left" defaultChecked />
-              <Radio name="lp-left" value="b" label="Option B" labelPosition="left" />
+              <Radio
+                name="lp-left"
+                value="a"
+                label="Option A"
+                labelPosition="left"
+                defaultChecked
+              />
+              <Radio
+                name="lp-left"
+                value="b"
+                label="Option B"
+                labelPosition="left"
+              />
             </RadioGroup>
           </div>
         </div>
@@ -108,16 +141,29 @@ export default function HomePage() {
         <div>
           <h3 className="text-h5 text-text-primary mb-4">Disabled</h3>
           <RadioGroup label="Disabled group" orientation="horizontal">
-            <Radio name="dis" value="on" label="Selected" disabled defaultChecked />
+            <Radio
+              name="dis"
+              value="on"
+              label="Selected"
+              disabled
+              defaultChecked
+            />
             <Radio name="dis" value="off" label="Unselected" disabled />
           </RadioGroup>
         </div>
 
         {/* Standalone (no label) */}
         <div>
-          <h3 className="text-h5 text-text-primary mb-4">Standalone (no label)</h3>
+          <h3 className="text-h5 text-text-primary mb-4">
+            Standalone (no label)
+          </h3>
           <div className="flex items-center gap-4">
-            <Radio name="standalone" value="1" aria-label="Option 1" defaultChecked />
+            <Radio
+              name="standalone"
+              value="1"
+              aria-label="Option 1"
+              defaultChecked
+            />
             <Radio name="standalone" value="2" aria-label="Option 2" />
             <Radio name="standalone" value="3" aria-label="Option 3" />
           </div>
@@ -137,13 +183,22 @@ export default function HomePage() {
               <TabsTrigger value="security">Security</TabsTrigger>
               <TabsTrigger value="notifications">Notifications</TabsTrigger>
             </TabsList>
-            <TabsContent value="account" className="mt-4 text-b1 text-text-secondary">
+            <TabsContent
+              value="account"
+              className="mt-4 text-b1 text-text-secondary"
+            >
               Manage your account details and preferences.
             </TabsContent>
-            <TabsContent value="security" className="mt-4 text-b1 text-text-secondary">
+            <TabsContent
+              value="security"
+              className="mt-4 text-b1 text-text-secondary"
+            >
               Update your password and two-factor authentication settings.
             </TabsContent>
-            <TabsContent value="notifications" className="mt-4 text-b1 text-text-secondary">
+            <TabsContent
+              value="notifications"
+              className="mt-4 text-b1 text-text-secondary"
+            >
               Choose which notifications you'd like to receive.
             </TabsContent>
           </Tabs>
@@ -154,17 +209,32 @@ export default function HomePage() {
           <h3 className="text-h5 text-text-primary mb-4">With Icons</h3>
           <Tabs defaultValue="profile">
             <TabsList>
-              <TabsTrigger value="profile" leadingIcon={<UserIcon />}>Profile</TabsTrigger>
-              <TabsTrigger value="settings" leadingIcon={<SettingsIcon />}>Settings</TabsTrigger>
-              <TabsTrigger value="alerts" trailingIcon={<BellIcon />}>Alerts</TabsTrigger>
+              <TabsTrigger value="profile" leadingIcon={<UserIcon />}>
+                Profile
+              </TabsTrigger>
+              <TabsTrigger value="settings" leadingIcon={<SettingsIcon />}>
+                Settings
+              </TabsTrigger>
+              <TabsTrigger value="alerts" trailingIcon={<BellIcon />}>
+                Alerts
+              </TabsTrigger>
             </TabsList>
-            <TabsContent value="profile" className="mt-4 text-b1 text-text-secondary">
+            <TabsContent
+              value="profile"
+              className="mt-4 text-b1 text-text-secondary"
+            >
               Your public profile information.
             </TabsContent>
-            <TabsContent value="settings" className="mt-4 text-b1 text-text-secondary">
+            <TabsContent
+              value="settings"
+              className="mt-4 text-b1 text-text-secondary"
+            >
               Application settings and configuration.
             </TabsContent>
-            <TabsContent value="alerts" className="mt-4 text-b1 text-text-secondary">
+            <TabsContent
+              value="alerts"
+              className="mt-4 text-b1 text-text-secondary"
+            >
               Recent alerts and activity log.
             </TabsContent>
           </Tabs>
@@ -176,13 +246,21 @@ export default function HomePage() {
           <Tabs defaultValue="active">
             <TabsList>
               <TabsTrigger value="active">Active</TabsTrigger>
-              <TabsTrigger value="coming-soon" disabled>Coming Soon</TabsTrigger>
+              <TabsTrigger value="coming-soon" disabled>
+                Coming Soon
+              </TabsTrigger>
               <TabsTrigger value="archive">Archive</TabsTrigger>
             </TabsList>
-            <TabsContent value="active" className="mt-4 text-b1 text-text-secondary">
+            <TabsContent
+              value="active"
+              className="mt-4 text-b1 text-text-secondary"
+            >
               Currently active items.
             </TabsContent>
-            <TabsContent value="archive" className="mt-4 text-b1 text-text-secondary">
+            <TabsContent
+              value="archive"
+              className="mt-4 text-b1 text-text-secondary"
+            >
               Archived items.
             </TabsContent>
           </Tabs>
@@ -199,7 +277,10 @@ export default function HomePage() {
                 </TabsTrigger>
               ))}
             </TabsList>
-            <TabsContent value="tab-1" className="mt-4 text-b1 text-text-secondary">
+            <TabsContent
+              value="tab-1"
+              className="mt-4 text-b1 text-text-secondary"
+            >
               Content for Tab 1.
             </TabsContent>
           </Tabs>

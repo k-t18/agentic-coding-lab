@@ -1,7 +1,7 @@
 import { UserRound } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { DoctorCardActions } from "./DoctorCardActions";
-import type { Doctor } from "../data/mockData";
+import type { Doctor } from "../../../app/appointment/data/mockData";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -31,7 +31,7 @@ export function DoctorCard({
         isActive
           ? "border-action-primary bg-primary-50 shadow-200"
           : "border-grey-200",
-        isDisabled && "opacity-50",
+        isDisabled && "opacity-50"
       )}
     >
       {/* Doctor info row */}
@@ -44,7 +44,7 @@ export function DoctorCard({
         {/* Info */}
         <div className="flex min-w-0 flex-col gap-0.5">
           <p className="truncate text-b1 font-semibold text-text-primary">
-            {doctor.name}
+            {doctor.doctor_name}
           </p>
           <p className="text-b2 text-text-secondary">{doctor.specialty}</p>
           <p className="text-b2 text-text-secondary">

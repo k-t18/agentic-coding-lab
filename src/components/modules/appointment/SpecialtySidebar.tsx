@@ -1,5 +1,5 @@
 import { SpecialtyListItem } from "./SpecialtyListItem";
-import type { Specialty } from "../data/mockData";
+import type { Specialty } from "../../../app/appointment/data/mockData";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -12,7 +12,11 @@ interface SpecialtySidebarProps {
 // ─── SpecialtySidebar ─────────────────────────────────────────────────────────
 // Left sidebar listing all selectable specialties.
 
-export function SpecialtySidebar({ specialties, selectedSpecialty, onSelect }: SpecialtySidebarProps) {
+export function SpecialtySidebar({
+  specialties,
+  selectedSpecialty,
+  onSelect,
+}: SpecialtySidebarProps) {
   return (
     <aside className="flex w-56 shrink-0 flex-col gap-1 rounded-xl border border-grey-200 bg-white p-2 shadow-100">
       {specialties.map((specialty) => (
