@@ -1,0 +1,34 @@
+{
+  "allow": [
+    // Running dev server, tests, formatting, linting, etc.
+    "Bash(npm run *)",
+    // Reading/Accessing files and folders
+    "Bash(cat *)",
+    "Bash(ls *)",
+
+    // GIT operations - Checking status, adding, committing, pushing, pulling, etc.
+    "Bash(git status *)",
+    "Bash(git diff *)"
+  ],
+  "deny": [
+    // Prevent destructive file operations
+    "Bash(rm *)",
+    "Bash(rmdir *)",
+    "Bash(mv *)",
+
+    // Prevent overwriting files via redirection (e.g. cat foo > bar)
+    "Bash(* > *)",
+
+    // Prevent dangerous git operations
+    "Bash(git push --force*)",
+    "Bash(git reset --hard*)",
+    "Bash(git clean *)",
+
+    // Prevent system-level commands
+    "Bash(sudo *)",
+    "Bash(chmod *)",
+    "Bash(chown *)",
+    "Bash(curl *)",
+    "Bash(wget *)"
+  ]
+}
