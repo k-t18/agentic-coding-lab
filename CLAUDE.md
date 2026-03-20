@@ -1,0 +1,165 @@
+# AGENT INSTRUCTIONS
+
+## Project Context (Fill in per project)
+
+```
+Project:
+Module working on:
+Current task:
+Constraints:
+```
+
+---
+
+## Stack
+
+React 18, Next.js (App Router), TypeScript (strict), Tailwind CSS, PrimeReact, TanStack Query, Zustand, React Hook Form + Zod, Vitest + RTL, ESLint + Prettier.
+
+## Folder Structure
+
+```
+src/
+├── components/shared/        # form-fields/, data-tables/, layout/
+├── components/modules/       # <module>/<Component>.tsx + test + index.ts + README.md(explaining how to use that component)
+├── hooks/shared & modules/
+├── routes/
+├── services/                 # <domain>.api.ts
+├── store/
+├── types/shared & modules    # <domain>.types.ts
+├── utils/
+└── constants/
+```
+
+## Naming
+
+| Thing      | Convention                    |
+| ---------- | ----------------------------- |
+| Components | `UserCard.tsx` (PascalCase)   |
+| Hooks      | `useUserData.ts`              |
+| Types      | `userCard.types.ts`           |
+| Services   | `userData.api.ts`             |
+| Constants  | `MAX_RETRY_COUNT`             |
+| Utils      | `formatCurrency` (verb-first) |
+
+## Rules
+
+**TypeScript:** Strict always. No `any` — use `unknown` + narrowing. Props get named interfaces (`UserCardProps`). No `!` or `as` without a comment.
+
+**Components:** Functional only. One per file. Max ~150 lines — split if larger. No inline styles. Use `cn()` for conditional classes.
+
+**useEffect:** Last resort only. Never for data fetching (use TanStack Query) or deriving state (use `useMemo`). Always clean up. Add a comment if used.
+
+**Data:** All server state via TanStack Query. Always handle `isLoading`, `isError`, empty state. API functions in `services/`, consumed via custom hooks.
+
+**Forms:** React Hook Form + Zod always. Use `zodResolver`. Show field-level errors. Form fields live in `components/shared/form-fields/`.
+
+**State:** Server state → TanStack Query. Local UI → `useState`. Global → Zustand/Redux. Never put server data in global store.
+
+**Testing (TDD):** Write tests before/alongside implementation. Co-locate test files. Test behaviour not implementation. Cover render, interaction, and edge cases.
+
+## Principles
+
+- **SOLID** — single responsibility, open for extension, narrow prop interfaces, depend on abstractions.
+- **YAGNI** — don't build for features that don't exist yet.
+- **KISS** — simplest correct solution wins. If a junior needs to Google it, simplify it.
+
+## Before Writing Code
+
+Always do the following first:
+
+1. Understand the exact scope of the request.
+2. Identify whether the task is:
+   - UI only
+   - state management
+   - API integration
+   - form handling
+   - validation
+   - performance optimization
+   - refactor
+   - bug fix
+3. Check whether an existing shared component, hook, type, utility, or service already solves part of the problem.
+4. Prefer extending existing patterns over inventing new ones.
+5. List affected files before making multi-file changes.
+6. For non-trivial features, briefly state:
+   - what will be changed
+   - why
+   - which files are affected
+7. Do not start implementation until the structure is clear.
+
+## Never
+
+- Use `any`, inline styles, or deprecated APIs
+- Abuse `useEffect` or skip error/loading states
+- Write monolithic components or over-engineered abstractions
+- Add TODOs or truncate generated code
+- Touch files outside the scope of the request
+- Hallucinate library APIs — say so if unsure
+
+## Architecture Boundaries
+
+- Shared components must remain domain-agnostic.
+- Module components may depend on shared components, but shared components must not depend on module components.
+- Services must not contain UI logic.
+- Components must not contain raw API request logic.
+- Validation schemas should live close to the form/module unless reused globally.
+- Business rules should not live inside JSX.
+- Types should be defined near their domain and reused via imports, never duplicated.
+- Utilities must stay pure whenever possible.
+- Store should not become a dumping ground for unrelated state.
+
+## Next.js App Router Rules
+
+- Default to Server Components unless client interactivity is required.
+- Add `"use client"` only when necessary.
+- Keep client boundaries as small as possible.
+- Do not move everything to client components for convenience.
+- Fetch server data on the server whenever practical.
+- Use route-level loading and error boundaries where applicable.
+- Keep page files thin; push UI into module components.
+
+## Testing Standards
+
+For components and hooks, test:
+
+- render correctness
+- user interaction
+- edge cases
+- loading / error / empty states
+- callback behavior
+- accessibility-critical behavior where relevant
+
+Do not test:
+
+- internal implementation details
+- private helper behavior indirectly covered elsewhere
+- third-party library internals
+
+Prefer:
+
+- user-centric queries
+- meaningful assertions
+- minimal mocking
+
+## Performance Rules
+
+- Do not prematurely optimize.
+- Use memoization only when it prevents real re-renders or expensive recalculation.
+- Avoid creating unstable inline objects/functions when they cause child rerenders in sensitive trees.
+- Virtualize very large lists when needed.
+- Split large components when render responsibilities are mixed.
+- Avoid unnecessary client components in Next.js App Router.
+- Prefer server rendering where interaction is not required.
+
+## Definition of Done
+
+A task is complete only if:
+
+- code compiles logically
+- types are correct
+- loading/error/empty states are handled
+- accessibility basics are covered
+- file placement follows project structure
+- naming follows conventions
+- no dead code remains
+- tests are included when relevant
+- component API is clean and documented if newly introduced
