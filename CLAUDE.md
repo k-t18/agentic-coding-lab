@@ -2,12 +2,7 @@
 
 ## Project Context (Fill in per project)
 
-```
-Project:
-Module working on:
-Current task:
-Constraints:
-```
+Fill in your project overview
 
 ---
 
