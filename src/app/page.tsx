@@ -15,6 +15,7 @@ import {
   UserIcon,
   BellIcon,
 } from "lucide-react";
+import { LookupInputField } from "@/components/shared/form-fields/LookupInputField/LookupInputField";
 
 export default function HomePage() {
   return (
@@ -23,6 +24,15 @@ export default function HomePage() {
       <p className="mt-2 text-b1 text-text-secondary">
         Next.js app with TypeScript, Tailwind CSS, and App Router.
       </p>
+      {/* Lookup Input Field */}
+      <LookupInputField
+        mode="lookup"
+        label="Lookup"
+        doctypeName="Charge Master"
+        descriptionField="charge_description"
+      />
+      <LookupInputField mode="manual-entry" label="Lookup" />
+      <LookupInputField mode="lookup" label="Lookup" descriptionEnabled />
 
       {/* Button showcase */}
       <section className="mt-12 space-y-8">
@@ -199,7 +209,7 @@ export default function HomePage() {
               value="notifications"
               className="mt-4 text-b1 text-text-secondary"
             >
-              Choose which notifications you'd like to receive.
+              Choose which notifications you&apos;d like to receive.
             </TabsContent>
           </Tabs>
         </div>
