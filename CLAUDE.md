@@ -14,16 +14,69 @@ React 18, Next.js (App Router), TypeScript (strict), Tailwind CSS, PrimeReact, T
 
 ```
 src/
-├── components/shared/        # form-fields/, data-tables/, layout/
-├── components/modules/       # <module>/<Component>.tsx + test + index.ts + README.md(explaining how to use that component)
-├── hooks/shared & modules/
-├── routes/
-├── services/                 # <domain>.api.ts
-├── store/
-├── types/shared & modules    # <domain>.types.ts
-├── utils/
-└── constants/
+├── app/                          # Next.js App Router pages and layouts
+├── components/
+│   ├── common/                   # Primitive, domain-agnostic UI atoms
+│   │   └── <ComponentName>/
+│   │       ├── <ComponentName>.tsx
+│   │       └── index.ts
+│   ├── shared/                   # Reusable form-fields, data-tables, layout wrappers
+│   │   └── form-fields/
+│   │       └── <ComponentName>/
+│   │           ├── <ComponentName>.tsx   # ONLY the component file — nothing else
+│   │           └── index.ts              # barrel export
+│   └── modules/                  # Domain-specific module components
+│       └── <module>/
+│           ├── <ComponentName>.tsx
+│           └── index.ts
+├── hooks/
+│   ├── shared/                   # Hooks reused across modules (e.g. useLookup.ts)
+│   └── modules/
+│       └── <module>/             # Domain-specific hooks (e.g. useFetchDoctors.ts)
+├── test/
+│   ├── shared/
+│   │   └── <component-name>/     # All test files related to that shared component go here
+│   │       └── *.test.ts         # (component tests, utility tests, hook tests — all here)
+│   └── modules/
+│       └── <module>/             # All test files related to that module go here
+│           └── *.test.ts
+├── types/
+│   ├── shared/                   # Shared types (e.g. lookup.types.ts)
+│   └── modules/
+│       └── <module>/             # Domain types (e.g. appointment.types.ts)
+├── utils/                        # Pure, stateless utility functions (e.g. sanitizeNumericInput.ts)
+├── services/                     # API functions — <domain>.api.ts
+├── lib/                          # Infrastructure: api-client, api-hooks, utils (cn)
+├── providers/                    # React context providers
+├── store/                        # Zustand global state slices
+└── constants/                    # App-wide constants (ALL_CAPS naming)
 ```
+
+### Strict File Placement Rules
+
+| Artifact | Location | Example |
+|---|---|---|
+| Shared component | `components/shared/<category>/<ComponentName>/` | `form-fields/LookupInputField/LookupInputField.tsx` |
+| Module component | `components/modules/<module>/` | `modules/appointment/DoctorCard.tsx` |
+| Shared hook | `hooks/shared/` | `hooks/shared/useLookup.ts` |
+| Module hook | `hooks/modules/<module>/` | `hooks/modules/appointment/useFetchDoctors.ts` |
+| Shared types | `types/shared/` | `types/shared/lookup.types.ts` |
+| Module types | `types/modules/<module>/` | `types/modules/appointment/appointment.types.ts` |
+| Utility function | `utils/` | `utils/sanitizeNumericInput.ts` |
+| Shared component test | `test/shared/<component-name>/` | `test/shared/lookup-input/LookupInputField.test.ts` |
+| Module component test | `test/modules/<module>/` | `test/modules/appointment/DoctorCard.test.ts` |
+| API service | `services/` | `services/lookup.api.ts` |
+
+### Component Folder Contains ONLY
+A component folder (e.g. `LookupInputField/`) must contain **only**:
+- `<ComponentName>.tsx` — the component itself
+- `index.ts` — barrel export
+
+**Never** place the following inside a component folder:
+- Test files (→ `test/shared/<component-name>/`)
+- Type definitions (→ `types/shared/` or `types/modules/<module>/`)
+- Custom hooks (→ `hooks/shared/` or `hooks/modules/<module>/`)
+- Utility functions (→ `utils/`)
 
 ## Naming
 
@@ -50,7 +103,7 @@ src/
 
 **State:** Server state → TanStack Query. Local UI → `useState`. Global → Zustand/Redux. Never put server data in global store.
 
-**Testing (TDD):** Write tests before/alongside implementation. Co-locate test files. Test behaviour not implementation. Cover render, interaction, and edge cases.
+**Testing (TDD):** Write tests before/alongside implementation. All test files for a component live in `test/shared/<component-name>/` or `test/modules/<module>/` — never inside the component folder. Test behaviour not implementation. Cover render, interaction, and edge cases.
 
 ## Principles
 
