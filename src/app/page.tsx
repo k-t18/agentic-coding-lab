@@ -48,6 +48,8 @@ export default function HomePage() {
             </Button>
             <Button variant="outline">Outline</Button>
             <Button variant="ghost">Ghost</Button>
+            <Button variant="alert">Alert</Button>
+            <Button variant="success">Success</Button>
           </div>
         </div>
 
@@ -209,7 +211,7 @@ export default function HomePage() {
               value="notifications"
               className="mt-4 text-b1 text-text-secondary"
             >
-              Choose which notifications you&apos;d like to receive.
+              Choose which notifications you would like to receive.
             </TabsContent>
           </Tabs>
         </div>

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-export type ButtonVariant = "primary" | "outline" | "ghost";
+export type ButtonVariant = "primary" | "outline" | "ghost" | "alert" | "success";
 export type ButtonSize = "giant" | "large" | "medium" | "small" | "tiny";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -111,6 +111,28 @@ const VARIANT_STYLES = {
     // Disabled
     "disabled:bg-transparent disabled:text-text-disabled",
   ].join(" "),
+
+  alert: [
+    // Base — red filled, white text
+    "bg-action-alert text-text-white border border-transparent",
+    // Hover
+    "hover:bg-action-alert-hover",
+    // Active / press
+    "active:bg-action-alert-active",
+    // Disabled
+    "disabled:bg-grey-200 disabled:text-text-disabled disabled:border-transparent",
+  ].join(" "),
+
+  success: [
+    // Base — green filled, white text
+    "bg-action-success text-text-white border border-transparent",
+    // Hover
+    "hover:bg-action-success-hover",
+    // Active / press
+    "active:bg-action-success-active",
+    // Disabled
+    "disabled:bg-grey-200 disabled:text-text-disabled disabled:border-transparent",
+  ].join(" "),
 } satisfies Record<ButtonVariant, string>;
 
 // ─── Spinner ──────────────────────────────────────────────────────────────────
@@ -192,9 +214,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           "font-sans whitespace-nowrap select-none",
           // ── Transitions
           "transition-colors duration-150",
-          // ── Focus ring
+          // ── Focus ring (color varies by variant)
           "focus-visible:outline-none",
-          "focus-visible:ring-2 focus-visible:ring-primary-300 focus-visible:ring-offset-2",
+          "focus-visible:ring-2 focus-visible:ring-offset-2",
+          variant === "alert"
+            ? "focus-visible:ring-red-300"
+            : variant === "success"
+              ? "focus-visible:ring-green-300"
+              : "focus-visible:ring-primary-300",
           // ── Disabled — block pointer events globally so hover does not fire
           "disabled:pointer-events-none",
           // ── Size

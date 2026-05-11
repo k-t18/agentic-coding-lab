@@ -136,6 +136,20 @@
   --color-action-primary-subtle: #edeffe;
 
   /* ----------------------------------------------------------
+     SEMANTIC COLORS — Action (Alert / Destructive)
+  ---------------------------------------------------------- */
+  --color-action-alert: #ee443f;
+  --color-action-alert-hover: #d93e39;
+  --color-action-alert-active: #a9302d;
+
+  /* ----------------------------------------------------------
+     SEMANTIC COLORS — Action (Success)
+  ---------------------------------------------------------- */
+  --color-action-success: #43b75d;
+  --color-action-success-hover: #3da755;
+  --color-action-success-active: #308242;
+
+  /* ----------------------------------------------------------
      SEMANTIC COLORS — Status
   ---------------------------------------------------------- */
   --color-status-success: #43b75d;
