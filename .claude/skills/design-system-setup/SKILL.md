@@ -86,21 +86,10 @@ Before generating files, inspect the existing project and determine:
 
 ### 1.1 Framework and Router Shape
 
-- Is this a Next.js project?
-- Is it using **App Router** or **Pages Router**?
-- Where is the global stylesheet loaded from?
-- Where are fonts configured?
+This skill assumes:
 
-### 1.2 Tailwind Version and Styling Strategy
-
-- Is the project using **Tailwind v3** or **Tailwind v4**?
-- Is token customization done in:
-  - `tailwind.config.*`
-  - CSS variables
-  - `@theme`
-  - custom SCSS or CSS files
-  - multiple places
-- Is there already a token layer in code?
+- A **Next.js** or **React** project using **App Router** or routes folder.
+- **Tailwind v4** with token customization via CSS variables and `@theme`
 
 ### 1.3 Existing System Files
 
@@ -301,16 +290,6 @@ Every extracted token should be categorized as one of:
 
 This is critical when working from screenshots or incomplete Figma files.
 
-### 3.4 Handle Messy Figma Safely
-
-If the source has inconsistent design decisions:
-
-- cluster visually identical or near-identical values
-- identify likely canonical values
-- isolate one-off exceptions
-- avoid promoting accidental mockup values into global tokens
-- document conflicts instead of silently flattening them
-
 ---
 
 ## Phase 4 — Token Summary Before File Generation
@@ -389,15 +368,7 @@ Prefer CSS-driven theming and token definition aligned with the project’s curr
 - Keep CSS variables and theme variables consistent.
 - Avoid introducing unnecessary parallel config layers.
 
-### 5.2 Tailwind v3 Projects
-
-Use `tailwind.config.*` extension patterns when appropriate.
-
-- **Extend** instead of replacing defaults.
-- Map semantic tokens cleanly.
-- Preserve existing utility behavior.
-
-### 5.3 Existing Tokenized Projects
+### 5.2 Existing Tokenized Projects
 
 If the project already has a coherent token system:
 
@@ -405,7 +376,7 @@ If the project already has a coherent token system:
 - Do not duplicate sources of truth.
 - Do not create extra token files unless the user wants them.
 
-### 5.4 File Creation Policy
+### 5.3 File Creation Policy
 
 Generate only what is needed. Possible outputs include, but are not limited to:
 
@@ -529,8 +500,6 @@ Always finish with:
 
 ---
 
-- **Do not assume App Router** if the project uses Pages Router.
-- **Do not assume Tailwind v3 patterns** in a Tailwind v4 project.
 - **Do not create duplicate token sources** without a reason.
 - **Do not silently invent dark mode** as if it were design-approved.
 - **Do not treat screenshot approximations** as fully confirmed values.
